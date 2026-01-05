@@ -28,13 +28,32 @@ new class extends Component
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-            </div>
+<!-- Navigation Links -->
+<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+        {{ __('Dashboard') }}
+    </x-nav-link>
+    
+    <!-- ВСИЧКИ виждат тези линкове -->
+    <x-nav-link :href="route('admin.houses.index')" :active="request()->routeIs('admin.houses.*')">
+        🏡 {{ __('Къщи') }}
+    </x-nav-link>
+
+    <x-nav-link :href="route('admin.settlements.index')" :active="request()->routeIs('admin.settlements.*')">
+        📍 {{ __('Места') }}
+    </x-nav-link>
+
+    <x-nav-link :href="route('admin.object-types.index')" :active="request()->routeIs('admin.object-types.*')">
+        🏷️ {{ __('Типове') }}
+    </x-nav-link>
+    
+    <!-- САМО админи виждат Потребители -->
+    @if(auth()->user()->is_admin)
+        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+            👥 {{ __('Потребители') }}
+        </x-nav-link>
+    @endif
+</div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -52,7 +71,7 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                        <x-dropdown-link :href="route('profile.edit')" wire:navigate>
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -79,12 +98,32 @@ new class extends Component
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+<div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+            {{ __('Dashboard') }}
+        </x-responsive-nav-link>
+        
+        <!-- ВСИЧКИ виждат тези линкове -->
+        <x-responsive-nav-link :href="route('admin.houses.index')" :active="request()->routeIs('admin.houses.*')">
+            🏡 {{ __('Къщи') }}
+        </x-responsive-nav-link>
+
+        <x-responsive-nav-link :href="route('admin.settlements.index')" :active="request()->routeIs('admin.settlements.*')">
+            📍 {{ __('Места') }}
+        </x-responsive-nav-link>
+
+        <x-responsive-nav-link :href="route('admin.object-types.index')" :active="request()->routeIs('admin.object-types.*')">
+            🏷️ {{ __('Типове') }}
+        </x-responsive-nav-link>
+        
+        <!-- САМО админи виждат Потребители -->
+        @if(auth()->user()->is_admin)
+            <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                👥 {{ __('Потребители') }}
             </x-responsive-nav-link>
-        </div>
+        @endif
+    </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -94,7 +133,7 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                <x-responsive-nav-link :href="route('profile.edit')" wire:navigate>
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
