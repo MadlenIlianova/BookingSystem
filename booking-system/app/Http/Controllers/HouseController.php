@@ -60,22 +60,19 @@ class HouseController extends Controller
             'beds_count' => 'required|integer|min:1',
             'object_type_id' => 'required|exists:object_types,id',
             'description' => 'nullable|string',
-            'images.*' => 'nullable|image|max:2048', // 2MB max per image
+            'image' => 'nullable|image|max:2048', 
         ]);
 
-        $house = House::create($request->except('images'));
+        $house = House::create($request->except('image'));
 
-        // Upload images
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('houses', 'public');
-                
-                $house->images()->create([
-                    'path' => $path,
-                    'original_name' => $image->getClientOriginalName(),
-                    'is_main' => $index === 0, // First image is main
-                ]);
-            }
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('houses', 'public');
+            
+            $house->images()->create([
+                'path' => $path,
+                'original_name' => $request->file('image')->getClientOriginalName(),
+                'is_main' => true,
+            ]);
         }
 
         return redirect()->route('admin.houses.index')
@@ -97,25 +94,27 @@ class HouseController extends Controller
             'beds_count' => 'required|integer|min:1',
             'object_type_id' => 'required|exists:object_types,id',
             'description' => 'nullable|string',
-            'images.*' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $house->update($request->except('images'));
+        $house->update($request->except('image'));
 
-        // Upload new images
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('houses', 'public');
-                
-                // If this is the first image and house has no main image, make it main
-                $isMain = $house->images()->count() === 0 && $index === 0;
-                
-                $house->images()->create([
-                    'path' => $path,
-                    'original_name' => $image->getClientOriginalName(),
-                    'is_main' => $isMain,
-                ]);
+
+        if ($request->hasFile('image')) {
+
+            if ($house->images()->exists()) {
+                $oldImage = $house->images()->first();
+                \Storage::disk('public')->delete($oldImage->path);
+                $oldImage->delete();
             }
+            
+            $path = $request->file('image')->store('houses', 'public');
+            
+            $house->images()->create([
+                'path' => $path,
+                'original_name' => $request->file('image')->getClientOriginalName(),
+                'is_main' => true,
+            ]);
         }
 
         return redirect()->route('admin.houses.index')
@@ -124,8 +123,8 @@ class HouseController extends Controller
 
     public function destroy(House $house)
     {
-        // Delete all images from storage
-        foreach ($house->images as $image) {
+        if ($house->images()->exists()) {
+            $image = $house->images()->first();
             \Storage::disk('public')->delete($image->path);
         }
         

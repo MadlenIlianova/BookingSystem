@@ -20,7 +20,7 @@ class UserController extends Controller
             });
         }
 
-        $users = $query->latest()->paginate(10)->withQueryString();
+        $users = $query->latest()->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -78,7 +78,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        // Не позволявай на потребител да изтрие себе си
         if ($user->id === auth()->id()) {
             return back()->with('error', 'Не можете да изтриете собствения си акаунт');
         }

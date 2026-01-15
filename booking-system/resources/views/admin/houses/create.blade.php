@@ -84,11 +84,7 @@
                 </div>    
                              <div class="mb-4">
     <label class="block font-semibold mb-2">Снимки</label>
-    <input type="file" 
-           name="images[]" 
-           multiple
-           accept="image/*"
-           class="border p-2 w-full rounded">
+    <input type="file" name="image" accept="image/*" class="border p-2 w-full rounded">
     <p class="text-sm text-gray-500 mt-1">Можете да изберете няколко снимки наведнъж. Първата снимка ще бъде главна.</p>
 </div>
         </div>
