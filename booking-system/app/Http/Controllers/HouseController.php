@@ -133,4 +133,4 @@ class HouseController extends Controller
         return redirect()->route('admin.houses.index')
             ->with('success', 'Къща за почивка е изтрита успешно');
     }
-}
+}  
