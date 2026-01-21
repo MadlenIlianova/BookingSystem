@@ -16,7 +16,7 @@
         <div class="mb-4 flex justify-between items-center">
             @if(auth()->check() && auth()->user()->is_admin)
                 <a href="{{ route('admin.houses.create') }}"
-                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                   class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
                    ➕ Добави къща
                 </a>
             @else
@@ -153,4 +153,4 @@
         </div>
 
     </div>
-</x-app-layout>./vendor/bin/sail artisan tinker
+</x-app-layout>

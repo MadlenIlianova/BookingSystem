@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black-800 leading-tight">
             📍 Външни места
         </h2>
     </x-slot>
@@ -16,7 +16,7 @@
         <div class="mb-4">
             @if(auth()->user()->is_admin)
                 <a href="{{ route('admin.settlements.create') }}"
-                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                   class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
                    ➕ Добави населено място
                 </a>
             @endif

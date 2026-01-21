@@ -16,7 +16,7 @@
         <div class="mb-4">
             @if(auth()->user()->is_admin)
                 <a href="{{ route('admin.object-types.create') }}"
-                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                   class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded">
                    ➕ Добави тип обект
                 </a>
             @endif

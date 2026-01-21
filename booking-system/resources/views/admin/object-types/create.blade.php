@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black-800 leading-tight">
             ➕ Добави тип обект
         </h2>
     </x-slot>
@@ -32,8 +32,8 @@
 
                 <div class="flex gap-3">
                     <button type="submit" 
-                            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded">
-                        💾 Запази
+                            class="bg-green-600 hover:bg-green-700 text-black px-6 py-2 rounded">
+                         Запази
                     </button>
                     <a href="{{ route('admin.object-types.index') }}" 
                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded">

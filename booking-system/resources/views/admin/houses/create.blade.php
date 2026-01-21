@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black-800 leading-tight">
             ➕ Добави къща за почивка
         </h2>
     </x-slot>
@@ -74,8 +74,8 @@
 
                 <div class="flex gap-3">
                     <button type="submit" 
-                            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded">
-                        💾 Запази
+                            class="bg-green-600 hover:bg-green-700 text-black px-6 py-2 rounded">
+                         Запази
                     </button>
                     <a href="{{ route('admin.houses.index') }}" 
                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded">
@@ -85,7 +85,6 @@
                              <div class="mb-4">
     <label class="block font-semibold mb-2">Снимки</label>
     <input type="file" name="image" accept="image/*" class="border p-2 w-full rounded">
-    <p class="text-sm text-gray-500 mt-1">Можете да изберете няколко снимки наведнъж. Първата снимка ще бъде главна.</p>
 </div>
         </div>
     </div>     
