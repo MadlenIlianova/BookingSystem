@@ -64,15 +64,7 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block font-semibold mb-2">Описание</label>
-                    <textarea name="description" 
-                              class="border p-2 w-full rounded" 
-                              rows="4">{{ old('description', $house->description) }}</textarea>
-                </div>
-
+                </div>                
                 <div class="flex gap-3">
                     <button type="submit" 
                             class="bg-green-600 hover:bg-green-700 text-black px-6 py-2 rounded">
